@@ -1,7 +1,6 @@
 import { Player } from '../types/Player';
 import { Server } from 'socket.io';
 import { LobbyState } from '../types/LobbyState';
-import { throws } from 'assert';
 
 export class Lobby {
     private socketServer: Server;
@@ -51,7 +50,11 @@ export class Lobby {
     }
 
     public removePlayer(socketId: string): void {
-        this.players = this.players.filter(player => player.socketId !== socketId);
+        this.players = this.players.filter((player) => player.socketId !== socketId);
         this.sendLobbyState();
+    }
+
+    public getPlayerNumber(): number {
+        return this.players.length;
     }
 }

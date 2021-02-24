@@ -31,7 +31,13 @@ export class LobbyHandler {
 
         socket.on('disconnect', () => {
             console.log(`[-] ${socket.id}`);
-            this.getLobbyOfSocketId(socket.id)?.removePlayer(socket.id);
+            const lobby = this.getLobbyOfSocketId(socket.id);
+            if (lobby === null) return;
+            if (lobby.getPlayerNumber() <= 1) {
+                this.lobbies = this.lobbies.filter((lobbie) => !lobbie.isSocketIdInLobby(socket.id));
+                return;
+            }
+            lobby.removePlayer(socket.id);
         });
 
         socket.on('toggleReady', () => {
