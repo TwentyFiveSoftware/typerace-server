@@ -29,6 +29,11 @@ export class LobbyHandler {
             lobby.addPlayer({ socketId: socket.id, username: username, isReady: false });
         });
 
+        socket.on('disconnect', () => {
+            console.log(`[-] ${socket.id}`);
+            this.getLobbyOfSocketId(socket.id)?.removePlayer(socket.id);
+        });
+
         socket.on('toggleReady', () => {
             this.getLobbyOfSocketId(socket.id)?.togglePlayerReady(socket.id);
         });
