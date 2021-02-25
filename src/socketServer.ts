@@ -15,9 +15,9 @@ const socketServer = (server) => {
 
         lobbyHandler.handleLobbyEvents(socket);
 
-        // socket.on('disconnect', () => {
-        //     console.log(`[-] ${socket.id}`);
-        // });
+        socket.on('disconnect', () => {
+            console.log(`[-] ${socket.id}`);
+        });
     });
 
     return io;

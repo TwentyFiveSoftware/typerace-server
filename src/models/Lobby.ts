@@ -54,7 +54,7 @@ export class Lobby {
         this.sendLobbyState();
     }
 
-    public getPlayerNumber(): number {
-        return this.players.length;
+    public isEmpty(): boolean {
+        return this.players.length === 0;
     }
 }

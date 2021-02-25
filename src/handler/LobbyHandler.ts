@@ -11,6 +11,11 @@ export class LobbyHandler {
 
     public handleLobbyEvents(socket: Socket): void {
         socket.on('joinLobby', (username, lobbyId) => {
+            if (!username.match(/^.{1,30}$/)) {
+                socket.emit('errorIncorrectUsername');
+                return;
+            }
+
             let lobby;
 
             if (lobbyId.length === 0) {
@@ -21,7 +26,7 @@ export class LobbyHandler {
             }
 
             if (!lobby) {
-                socket.emit('lobbyNotFound');
+                socket.emit('errorLobbyNotFound');
                 return;
             }
 
@@ -30,14 +35,8 @@ export class LobbyHandler {
         });
 
         socket.on('disconnect', () => {
-            console.log(`[-] ${socket.id}`);
-            const lobby = this.getLobbyOfSocketId(socket.id);
-            if (lobby === null) return;
-            if (lobby.getPlayerNumber() <= 1) {
-                this.lobbies = this.lobbies.filter((lobbie) => !lobbie.isSocketIdInLobby(socket.id));
-                return;
-            }
-            lobby.removePlayer(socket.id);
+            this.getLobbyOfSocketId(socket.id)?.removePlayer(socket.id);
+            this.lobbies = this.lobbies.filter((lobby) => !lobby.isEmpty());
         });
 
         socket.on('toggleReady', () => {
@@ -50,12 +49,6 @@ export class LobbyHandler {
     }
 
     private getLobbyOfSocketId(socketId: string): Lobby | null {
-        for (const lobby of this.lobbies) {
-            if (lobby.isSocketIdInLobby(socketId)) {
-                return lobby;
-            }
-        }
-
-        return null;
+        return this.lobbies.find((lobby) => lobby.isSocketIdInLobby(socketId)) ?? null;
     }
 }
