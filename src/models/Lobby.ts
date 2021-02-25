@@ -1,15 +1,23 @@
 import { Player } from '../types/Player';
 import { Server } from 'socket.io';
 import { LobbyState } from '../types/LobbyState';
+import { Game } from './Game';
+import { TEXTS } from '../data/texts';
 
 export class Lobby {
-    private socketServer: Server;
+    private readonly socketServer: Server;
     public lobbyId: string;
+    public game: Game;
+
     private players: Player[] = [];
+    private text: string;
 
     constructor(socketServer: Server) {
         this.socketServer = socketServer;
         this.lobbyId = Lobby.generateLobbyId();
+        this.text = TEXTS[Math.floor(Math.random() * TEXTS.length)];
+
+        this.game = new Game(this.socketServer, this.lobbyId);
     }
 
     private static generateLobbyId(): string {
@@ -46,6 +54,11 @@ export class Lobby {
         if (!player) return;
 
         player.isReady = !player.isReady;
+
+        if (this.players.length > 1 && !this.players.some((player) => !player.isReady)) {
+            this.game.startGame({ players: this.players, text: this.text });
+        }
+
         this.sendLobbyState();
     }
 

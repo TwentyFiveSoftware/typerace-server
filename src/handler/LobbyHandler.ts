@@ -25,13 +25,22 @@ export class LobbyHandler {
                 lobby = this.getLobbyOfId(lobbyId.toUpperCase());
             }
 
-            if (!lobby) {
+            if (!lobby || lobby?.game.started) {
                 socket.emit('errorLobbyNotFound');
                 return;
             }
 
             socket.join(lobby.lobbyId);
-            lobby.addPlayer({ socketId: socket.id, username: username, isReady: false });
+
+            lobby.addPlayer({
+                socketId: socket.id,
+                username: username,
+                isReady: false,
+                currentTextPosition: 0,
+                typingSpeed: 0,
+            });
+
+            lobby.game.handleGameEvents(socket);
         });
 
         socket.on('disconnect', () => {
