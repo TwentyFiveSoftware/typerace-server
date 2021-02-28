@@ -20,6 +20,7 @@ export class Game {
     public startGame(gameState: GameState): void {
         this.gameState = gameState;
         this.started = true;
+        this.sendGameState();
 
         setInterval(() => {
             this.sendGameState();
