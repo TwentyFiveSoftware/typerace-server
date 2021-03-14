@@ -7,4 +7,6 @@ export interface Player {
 
     currentTextPosition: number;
     typingSpeed: number;
+
+    playAgain: boolean;
 }

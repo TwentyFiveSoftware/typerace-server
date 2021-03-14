@@ -31,7 +31,18 @@ export class Lobby {
         return s;
     }
 
-    public addPlayer(player: Player): void {
+    public addPlayer(socketId: string, username: string): void {
+        const player: Player = {
+            socketId,
+            username,
+            isReady: false,
+            isFinished: false,
+            finishTime: 0,
+            currentTextPosition: 0,
+            typingSpeed: 0,
+            playAgain: false,
+        };
+
         this.players.push(player);
         this.sendLobbyState();
     }

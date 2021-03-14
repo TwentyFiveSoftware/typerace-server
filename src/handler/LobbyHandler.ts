@@ -32,15 +32,7 @@ export class LobbyHandler {
 
             socket.join(lobby.lobbyId);
 
-            lobby.addPlayer({
-                socketId: socket.id,
-                username: username,
-                isReady: false,
-                isFinished: false,
-                finishTime: 0,
-                currentTextPosition: 0,
-                typingSpeed: 0,
-            });
+            lobby.addPlayer(socket.id, username);
 
             lobby.game.handleGameEvents(socket);
         });
