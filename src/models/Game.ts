@@ -39,11 +39,12 @@ export class Game {
         return this.gameState.players.find((player) => player.socketId === socketId) ?? null;
     }
 
-    public handleGameEvents(socket: Socket): void {
+    public handleGameEvents(socket: Socket, gameState: GameState): void {
         socket.on('gameUpdate', (currentPos: number) => {
             if (!this.started) return;
             if(currentPos == this.gameState.text.length){
                 this.getPlayerOfSocket(socket.id).isFinished = true;
+                this.getPlayerOfSocket(socket.id).finishTime = Date.now() - gameState.gameStartTime;
             }
             this.getPlayerOfSocket(socket.id).currentTextPosition = currentPos;
         });

@@ -37,6 +37,7 @@ export class LobbyHandler {
                 username: username,
                 isReady: false,
                 isFinished: false,
+                finishTime: 0,
                 currentTextPosition: 0,
                 typingSpeed: 0,
             });
