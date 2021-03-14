@@ -15,7 +15,7 @@ export class Lobby {
     constructor(socketServer: Server) {
         this.socketServer = socketServer;
         this.lobbyId = Lobby.generateLobbyId();
-        this.text = TEXTS[Math.floor(Math.random() * TEXTS.length)];
+        this.text = Lobby.getRandomText();
 
         this.game = new Game(this.socketServer, this.lobbyId);
     }
@@ -29,6 +29,10 @@ export class Lobby {
         }
 
         return s;
+    }
+
+    public static getRandomText(): string {
+        return TEXTS[Math.floor(Math.random() * TEXTS.length)];
     }
 
     public addPlayer(socketId: string, username: string): void {

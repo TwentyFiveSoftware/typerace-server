@@ -33,7 +33,7 @@ export const TEXTS: string[] = [
     'Starlink is a satellite internet constellation being constructed by SpaceX providing satellite Internet access. The constellation will consist of thousands of mass-produced small satellites in low Earth orbit (LEO), working in combination with ground transceivers.',
 
     // https://en.wikipedia.org/wiki/SpaceX_Starship
-    'The SpaceX Starship system is a proposed fully reusable, two-stage-to-orbit super heavy-lift launch vehicle under development by SpaceX. The system is composed of a booster stage, named Super Heavy, and a second stage, also referred to as "Starship".',
+    'The SpaceX Starship system is a proposed fully reusable, two-stage-to-orbit super heavy-lift launch vehicle under development by SpaceX. The system is composed of a booster stage, named Super Heavy, and a second stage, also referred to as Starship.',
 
     // https://en.wikipedia.org/wiki/Netflix
     'Netflix, Inc. is an American over-the-top content platform and production company headquartered in Los Gatos, California. Netflix was founded in Scotts Valley, California.',
@@ -45,7 +45,7 @@ export const TEXTS: string[] = [
     'Artificial intelligence (AI) is intelligence demonstrated by machines, unlike the natural intelligence displayed by humans and animals, which involves consciousness and emotionality.',
 
     // https://en.wikipedia.org/wiki/Video_game
-    'A video game is an electronic game that involves interaction with a user interface or input device – such as a joystick, controller, keyboard, or motion sensing device – to generate visual feedback for a player.',
+    'A video game is an electronic game that involves interaction with a user interface or input device - such as a joystick, controller, keyboard, or motion sensing device - to generate visual feedback for a player.',
 
     // https://en.wikipedia.org/wiki/Golden_Gate_Bridge
     'The Golden Gate Bridge is a suspension bridge spanning the Golden Gate, the one-mile-wide (1.6 km) strait connecting San Francisco Bay and the Pacific Ocean.',
@@ -57,5 +57,17 @@ export const TEXTS: string[] = [
     'Adobe Inc. is an American multinational computer software company. It has historically specialized in software for the creation and publication of a wide range of content, including graphics, photography, illustration, animation, multimedia/video, motion pictures and print.',
 
     // https://en.wikipedia.org/wiki/Discord_(software)
-    'Discord is a VoIP, instant messaging and digital distribution platform designed for creating communities. Users communicate with voice calls, video calls, text messaging, media and files in private chats or as part of communities called "servers".',
+    'Discord is a VoIP, instant messaging and digital distribution platform designed for creating communities. Users communicate with voice calls, video calls, text messaging, media and files in private chats or as part of communities called servers.',
+
+    // https://en.wikipedia.org/wiki/Amazon_Web_Services
+    'Amazon Web Services (AWS) is a subsidiary of Amazon providing on-demand cloud computing platforms and APIs to individuals, companies, and governments, on a metered pay-as-you-go basis.',
+
+    // https://en.wikipedia.org/wiki/Steam_(service)
+    'Steam is a video game digital distribution service by Valve. It was launched as a standalone software client in September 2003 as a way for Valve to provide automatic updates for their games, and expanded to include games from third-party publishers.',
+
+    // https://en.wikipedia.org/wiki/Unity_(game_engine)
+    'Unity is a cross-platform game engine developed by Unity Technologies, first announced and released in June 2005. The engine can be used to create three-dimensional, two-dimensional, virtual reality, and augmented reality games, as well as simulations and other experiences.',
+
+    // https://en.wikipedia.org/wiki/Internet
+    'The Internet is the global system of interconnected computer networks that uses the Internet protocol suite (TCP/IP) to communicate between networks and devices.',
 ];

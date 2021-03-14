@@ -1,6 +1,7 @@
 import { Server, Socket } from 'socket.io';
 import { GameState } from '../types/GameState';
 import { Player } from '../types/Player';
+import { Lobby } from './Lobby';
 
 export class Game {
     public started: boolean = false;
@@ -61,6 +62,7 @@ export class Game {
 
         this.gameState.isFinished = false;
         this.gameState.gameStartTime = Date.now();
+        this.gameState.text = Lobby.getRandomText();
 
         this.socketServer.to(this.lobbyId).emit('restart');
     }
