@@ -10,7 +10,7 @@ export class Lobby {
     public game: Game;
 
     private players: Player[] = [];
-    private text: string;
+    private readonly text: string;
 
     constructor(socketServer: Server) {
         this.socketServer = socketServer;
