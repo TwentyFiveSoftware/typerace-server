@@ -23,10 +23,15 @@ export class Game {
         this.sendGameState();
 
         setInterval(() => {
-            for (let player of gameState.players) {
-                if(player.isFinished) continue;
-                player.typingSpeed = Math.floor(player.currentTextPosition / ((Date.now() - gameState.gameStartTime) / 1000) * 60);
+            for (const player of gameState.players.filter((p) => !p.isFinished))
+                player.typingSpeed = Math.floor(
+                    (player.currentTextPosition / ((Date.now() - gameState.gameStartTime) / 1000)) * 60,
+                );
+
+            if (!this.gameState.players.some((p) => !p.isFinished)) {
+                this.gameState.isFinished = true;
             }
+
             this.sendGameState();
         }, 1000);
     }
@@ -39,14 +44,19 @@ export class Game {
         return this.gameState.players.find((player) => player.socketId === socketId) ?? null;
     }
 
-    public handleGameEvents(socket: Socket, gameState: GameState): void {
+    public handleGameEvents(socket: Socket): void {
         socket.on('gameUpdate', (currentPos: number) => {
-            if (!this.started) return;
-            if(currentPos == this.gameState.text.length){
-                this.getPlayerOfSocket(socket.id).isFinished = true;
-                this.getPlayerOfSocket(socket.id).finishTime = Date.now() - gameState.gameStartTime;
+            if (!this.started || this.gameState.isFinished) return;
+
+            const player = this.getPlayerOfSocket(socket.id);
+            if (player.isFinished) return;
+
+            if (currentPos === this.gameState.text.length) {
+                player.isFinished = true;
+                player.finishTime = Date.now();
             }
-            this.getPlayerOfSocket(socket.id).currentTextPosition = currentPos;
+
+            player.currentTextPosition = currentPos;
         });
     }
 }

@@ -55,9 +55,13 @@ export class Lobby {
 
         player.isReady = !player.isReady;
 
-        if (this.players.length > 1 && !this.players.some((player) => !player.isReady)) {
-            this.game.startGame({ players: this.players, text: this.text, gameStartTime: Date.now() });
-        }
+        if (this.players.length > 1 && !this.players.some((player) => !player.isReady))
+            this.game.startGame({
+                players: this.players,
+                text: this.text,
+                gameStartTime: Date.now(),
+                isFinished: false,
+            });
 
         this.sendLobbyState();
     }
