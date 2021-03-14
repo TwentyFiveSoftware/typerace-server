@@ -23,6 +23,9 @@ export class Game {
         this.sendGameState();
 
         setInterval(() => {
+            for (let player of gameState.players) {
+                player.typingSpeed = Math.floor(player.currentTextPosition / ((Date.now() - gameState.gameStartTime) / 1000) * 60);
+            }
             this.sendGameState();
         }, 1000);
     }
