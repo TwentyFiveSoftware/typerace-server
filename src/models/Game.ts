@@ -24,6 +24,7 @@ export class Game {
 
         setInterval(() => {
             for (let player of gameState.players) {
+                if(player.isFinished) continue;
                 player.typingSpeed = Math.floor(player.currentTextPosition / ((Date.now() - gameState.gameStartTime) / 1000) * 60);
             }
             this.sendGameState();
@@ -41,7 +42,9 @@ export class Game {
     public handleGameEvents(socket: Socket): void {
         socket.on('gameUpdate', (currentPos: number) => {
             if (!this.started) return;
-
+            if(currentPos == this.gameState.text.length){
+                this.getPlayerOfSocket(socket.id).isFinished = true;
+            }
             this.getPlayerOfSocket(socket.id).currentTextPosition = currentPos;
         });
     }

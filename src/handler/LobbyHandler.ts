@@ -36,6 +36,7 @@ export class LobbyHandler {
                 socketId: socket.id,
                 username: username,
                 isReady: false,
+                isFinished: false,
                 currentTextPosition: 0,
                 typingSpeed: 0,
             });
