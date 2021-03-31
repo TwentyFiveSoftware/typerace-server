@@ -4,6 +4,7 @@ export interface Player {
     isReady: boolean;
     isFinished: boolean;
     finishTime: number;
+    carIndex: number;
 
     currentTextPosition: number;
     typingSpeed: number;

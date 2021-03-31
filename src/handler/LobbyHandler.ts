@@ -45,6 +45,10 @@ export class LobbyHandler {
         socket.on('toggleReady', () => {
             this.getLobbyOfSocketId(socket.id)?.togglePlayerReady(socket.id);
         });
+
+        socket.on('switchCar', (carIndex) => {
+            this.getLobbyOfSocketId(socket.id)?.switchPlayerCar(socket.id, carIndex);
+        })
     }
 
     private getLobbyOfId(lobbyId: string): Lobby | null {

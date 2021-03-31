@@ -42,6 +42,7 @@ export class Lobby {
             isReady: false,
             isFinished: false,
             finishTime: 0,
+            carIndex: 0,
             currentTextPosition: 0,
             typingSpeed: 0,
             playAgain: false,
@@ -88,5 +89,12 @@ export class Lobby {
 
     public isEmpty(): boolean {
         return this.players.length === 0;
+    }
+
+    public switchPlayerCar(socketId: string, carIndex: number): void {
+        const player: Player = this.getPlayerOfSocketId(socketId);
+        if (!player) return;
+        player.carIndex = carIndex;
+        this.sendLobbyState();
     }
 }
