@@ -15,7 +15,7 @@ export class Game {
         this.socketServer = socketServer;
         this.lobbyId = lobbyId;
 
-        this.gameState = null;
+        this.gameState = { players: [], text: '', gameStartTime: 0, isFinished: false };
     }
 
     public startGame(gameState: GameState): void {

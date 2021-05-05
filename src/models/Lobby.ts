@@ -32,7 +32,7 @@ export class Lobby {
     }
 
     public static getRandomText(): string {
-        return TEXTS[Math.floor(Math.random() * TEXTS.length)];
+        return TEXTS[Math.floor(Math.random() * TEXTS.length)] ?? '';
     }
 
     public addPlayer(socketId: string, username: string): void {
@@ -62,11 +62,11 @@ export class Lobby {
     }
 
     private getPlayerOfSocketId(socketId: string): Player | null {
-        return this.players.find((player) => player.socketId === socketId);
+        return this.players.find((player) => player.socketId === socketId) ?? null;
     }
 
     public togglePlayerReady(socketId: string): void {
-        const player: Player = this.getPlayerOfSocketId(socketId);
+        const player = this.getPlayerOfSocketId(socketId);
         if (!player) return;
 
         player.isReady = !player.isReady;
@@ -92,7 +92,7 @@ export class Lobby {
     }
 
     public switchPlayerCar(socketId: string, carIndex: number): void {
-        const player: Player = this.getPlayerOfSocketId(socketId);
+        const player = this.getPlayerOfSocketId(socketId);
         if (!player) return;
         player.carIndex = carIndex;
         this.sendLobbyState();

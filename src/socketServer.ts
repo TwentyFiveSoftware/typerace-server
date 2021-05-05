@@ -1,7 +1,8 @@
+import * as http from 'http';
 import { Server } from 'socket.io';
 import { LobbyHandler } from './handler/LobbyHandler';
 
-const socketServer = (server) => {
+const socketServer = (server: http.Server) => {
     const io = new Server(server, {
         cors: {
             origin: '*',
