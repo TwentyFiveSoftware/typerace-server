@@ -1,24 +1,16 @@
 import * as http from 'http';
 import { Server } from 'socket.io';
-import { LobbyHandler } from './handler/LobbyHandler';
+import registerSocketEvents from './socketEvents';
 
 const socketServer = (server: http.Server): Server => {
-    const io = new Server(server, {
-        cors: {
-            origin: '*',
-        },
-    });
-
-    const lobbyHandler = new LobbyHandler(io);
+    const io = new Server(server, { cors: { origin: '*' } });
 
     io.on('connection', socket => {
         console.log(`[+] ${socket.id}`);
 
-        lobbyHandler.handleLobbyEvents(socket);
+        registerSocketEvents(io, socket);
 
-        socket.on('disconnect', () => {
-            console.log(`[-] ${socket.id}`);
-        });
+        socket.on('disconnect', () => console.log(`[-] ${socket.id}`));
     });
 
     return io;
