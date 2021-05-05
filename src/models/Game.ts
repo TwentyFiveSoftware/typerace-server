@@ -4,7 +4,7 @@ import { Player } from '../types/Player';
 import { Lobby } from './Lobby';
 
 export class Game {
-    public started: boolean = false;
+    public started = false;
 
     private socketServer: Server;
     private lobbyId: string;
@@ -28,12 +28,12 @@ export class Game {
 
     private startGameInterval(): void {
         setInterval(() => {
-            for (const player of this.gameState.players.filter((p) => !p.isFinished))
+            for (const player of this.gameState.players.filter(p => !p.isFinished))
                 player.typingSpeed = Math.floor(
                     (player.currentTextPosition / ((Date.now() - this.gameState.gameStartTime) / 1000)) * 60,
                 );
 
-            if (!this.gameState.players.some((p) => !p.isFinished)) {
+            if (!this.gameState.players.some(p => !p.isFinished)) {
                 this.gameState.isFinished = true;
             }
 
@@ -46,7 +46,7 @@ export class Game {
     }
 
     private getPlayerOfSocket(socketId: string): Player | null {
-        return this.gameState.players.find((player) => player.socketId === socketId) ?? null;
+        return this.gameState.players.find(player => player.socketId === socketId) ?? null;
     }
 
     private restart(): void {
@@ -90,7 +90,7 @@ export class Game {
 
             player.playAgain = !player.playAgain;
 
-            if (!this.gameState.players.some((p) => !p.playAgain)) {
+            if (!this.gameState.players.some(p => !p.playAgain)) {
                 this.restart();
             }
 

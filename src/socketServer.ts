@@ -2,7 +2,7 @@ import * as http from 'http';
 import { Server } from 'socket.io';
 import { LobbyHandler } from './handler/LobbyHandler';
 
-const socketServer = (server: http.Server) => {
+const socketServer = (server: http.Server): Server => {
     const io = new Server(server, {
         cors: {
             origin: '*',
@@ -11,7 +11,7 @@ const socketServer = (server: http.Server) => {
 
     const lobbyHandler = new LobbyHandler(io);
 
-    io.on('connection', (socket) => {
+    io.on('connection', socket => {
         console.log(`[+] ${socket.id}`);
 
         lobbyHandler.handleLobbyEvents(socket);
