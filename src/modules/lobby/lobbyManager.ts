@@ -49,8 +49,8 @@ const joinLobby = (lobbyId: string, socketId: string, username: string): void =>
     getLobby(lobbyId)?.players.push(player);
 };
 
-const leaveLobby = (lobbyId: string, socketId: string): void => {
-    const lobby = getLobby(lobbyId);
+const leaveLobby = (socketId: string): void => {
+    const lobby = getLobby(getLobbyIdOfPlayer(socketId));
     if (!lobby) return;
 
     lobby.players = lobby.players.filter(player => player.socketId !== socketId);

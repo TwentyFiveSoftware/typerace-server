@@ -5,7 +5,7 @@ import type { ILobby } from '../lobby/types/Lobby';
 import { SocketResponseType } from '../../types/SocketResponseType';
 import { getRandomText } from '../text/textManager';
 
-const games: IGame[] = [];
+let games: IGame[] = [];
 
 const startGame = (props: DefaultEventProps, lobby: ILobby): void => {
     const game: IGame = {
@@ -79,4 +79,13 @@ const startGameUpdateLoop = (props: DefaultEventProps, game: IGame): void => {
     }, 1000);
 };
 
-export { getGame, startGame, getGameOfPlayer, sendGameUpdate, restartGame };
+const leaveGame = (socketId: string): void => {
+    const game = getGameOfPlayer(socketId);
+    if (!game) return;
+
+    game.lobby.players = game.lobby.players.filter(player => player.socketId !== socketId);
+
+    games = games.filter(game => game.lobby.players.length > 0);
+};
+
+export { getGame, startGame, getGameOfPlayer, sendGameUpdate, restartGame, leaveGame };

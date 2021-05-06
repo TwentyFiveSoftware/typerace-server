@@ -7,7 +7,7 @@ const leaveLobbyEvent = (props: DefaultEventProps): void => {
     const lobbyId = getLobbyIdOfPlayer(socket.id);
     if (!lobbyId) return;
 
-    leaveLobby(lobbyId, socket.id);
+    leaveLobby(socket.id);
     sendLobbyUpdate(props, lobbyId);
 };
 
