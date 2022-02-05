@@ -6,6 +6,8 @@ import { SocketResponseType } from '../../types/SocketResponseType';
 const LOBBY_ID_LENGTH = 5;
 const LOBBY_ID_ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
+const CAR_AMOUNT = 9;
+
 let lobbies: ILobby[] = [];
 
 const generateLobbyId = (): string => {
@@ -40,7 +42,7 @@ const joinLobby = (lobbyId: string, socketId: string, username: string): void =>
         isReady: false,
         isFinished: false,
         finishTime: 0,
-        carIndex: 0,
+        carIndex: Math.floor(Math.random() * CAR_AMOUNT),
         currentTextPosition: 0,
         typingSpeed: 0,
         playAgain: false,

@@ -4,7 +4,7 @@
     "scripts": {
         "start": "node dist/index.js",
         "postinstall": "tsc",
-        "dev": "nodemon"
+        "dev": "nodemon src/index.ts"
     },
     "dependencies": {
         "express": "^4.17.2",
