@@ -6,7 +6,6 @@ import leaveLobby from './modules/lobby/events/leaveLobby';
 import toggleReady from './modules/lobby/events/toggleReady';
 import switchCarEvent from './modules/lobby/events/switchCar';
 import gameUpdate from './modules/game/events/gameUpdate';
-import togglePlayAgain from './modules/game/events/togglePlayAgain';
 import leaveGame from './modules/game/events/leaveGame';
 
 const registerSocketEvents = (io: Server, socket: Socket): void => {
@@ -26,8 +25,6 @@ const registerSocketEvents = (io: Server, socket: Socket): void => {
     });
 
     socket.on(SocketRequestType.GAME_UPDATE, (currentTextPos: number) => gameUpdate(props, currentTextPos));
-
-    socket.on(SocketRequestType.GAME_TOGGLE_PLAY_AGAIN, () => togglePlayAgain(props));
 };
 
 export default registerSocketEvents;

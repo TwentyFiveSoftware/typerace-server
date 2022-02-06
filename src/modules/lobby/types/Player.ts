@@ -8,6 +8,4 @@ export interface IPlayer {
 
     currentTextPosition: number;
     typingSpeed: number;
-
-    playAgain: boolean;
 }

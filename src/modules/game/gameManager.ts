@@ -4,10 +4,21 @@ import type { IGameState } from './types/GameState';
 import type { ILobby } from '../lobby/types/Lobby';
 import { SocketResponseType } from '../../types/SocketResponseType';
 import { getRandomText } from '../text/textManager';
+import { sendLobbyUpdate } from '../lobby/lobbyManager';
 
 let games: IGame[] = [];
 
 const startGame = (props: DefaultEventProps, lobby: ILobby): void => {
+    if (getGame(lobby.lobbyId) && !getGame(lobby.lobbyId)?.isFinished) return;
+
+    lobby.players.forEach(player => {
+        player.isFinished = false;
+        player.finishTime = 0;
+        player.currentTextPosition = 0;
+        player.typingSpeed = 0;
+        player.isReady = false;
+    });
+
     const game: IGame = {
         gameStartTime: Date.now(),
         started: true,
@@ -16,9 +27,12 @@ const startGame = (props: DefaultEventProps, lobby: ILobby): void => {
         lobby,
     };
 
+    games = games.filter(game => game.lobby.lobbyId !== lobby.lobbyId);
     games.push(game);
 
+    sendLobbyUpdate(props, lobby.lobbyId);
     startGameUpdateLoop(props, game);
+    sendGameUpdate(props, game);
 };
 
 const getGameOfPlayer = (socketId: string): IGame | null =>
@@ -37,27 +51,6 @@ const sendGameUpdate = ({ io }: DefaultEventProps, game: IGame | null): void => 
     };
 
     io.to(game.lobby.lobbyId).emit(SocketResponseType.GAME_UPDATE, gameState);
-};
-
-const restartGame = (props: DefaultEventProps, lobbyId: string): void => {
-    const game = getGame(lobbyId);
-    if (!lobbyId || !game || !game.isFinished) return;
-
-    game.lobby.players.forEach(player => {
-        player.isFinished = false;
-        player.finishTime = 0;
-        player.currentTextPosition = 0;
-        player.typingSpeed = 0;
-        player.playAgain = false;
-    });
-
-    game.isFinished = false;
-    game.gameStartTime = Date.now();
-    game.text = getRandomText();
-
-    props.io.to(lobbyId).emit(SocketResponseType.GAME_RESTART);
-    sendGameUpdate(props, game);
-    startGameUpdateLoop(props, game);
 };
 
 const startGameUpdateLoop = (props: DefaultEventProps, game: IGame): void => {
@@ -88,4 +81,4 @@ const leaveGame = (socketId: string): void => {
     games = games.filter(game => game.lobby.players.length > 0);
 };
 
-export { getGame, startGame, getGameOfPlayer, sendGameUpdate, restartGame, leaveGame };
+export { getGame, startGame, getGameOfPlayer, sendGameUpdate, leaveGame };

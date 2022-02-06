@@ -1,6 +1,7 @@
 import type { DefaultEventProps } from '../../../types/DefaultEventProps';
 import { SocketResponseType } from '../../../types/SocketResponseType';
 import { createLobby, getLobby, joinLobby, sendLobbyUpdate } from '../lobbyManager';
+import { getGame } from '../../game/gameManager';
 
 const joinLobbyEvent = (props: DefaultEventProps, username: string, lobbyId: string | null): void => {
     const { socket } = props;
@@ -12,6 +13,11 @@ const joinLobbyEvent = (props: DefaultEventProps, username: string, lobbyId: str
 
     if (lobbyId && lobbyId.length > 0 && !getLobby(lobbyId)) {
         socket.emit(SocketResponseType.LOBBY_ERROR_NOT_FOUND);
+        return;
+    }
+
+    if (getGame(lobbyId) && !getGame(lobbyId)?.isFinished) {
+        socket.emit(SocketResponseType.LOBBY_ERROR_GAME_ONGOING);
         return;
     }
 

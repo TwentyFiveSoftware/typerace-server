@@ -45,7 +45,6 @@ const joinLobby = (lobbyId: string, socketId: string, username: string): void =>
         carIndex: Math.floor(Math.random() * CAR_AMOUNT),
         currentTextPosition: 0,
         typingSpeed: 0,
-        playAgain: false,
     };
 
     getLobby(lobbyId)?.players.push(player);
