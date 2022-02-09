@@ -1,5 +1,17 @@
 import { TEXTS } from './data/texts';
+import { ILobby } from '../lobby/types/Lobby';
 
-const getRandomText = (): string => TEXTS[Math.floor(Math.random() * TEXTS.length)] ?? '';
+export const chooseRandomText = (lobby: ILobby): string => {
+    if (lobby.typedTexts.length === TEXTS.length) {
+        lobby.typedTexts = [];
+    }
 
-export { getRandomText };
+    let index;
+    do {
+        index = Math.floor(Math.random() * TEXTS.length);
+    } while (lobby.typedTexts.includes(index));
+
+    lobby.typedTexts.push(index);
+
+    return TEXTS[index] ?? '';
+};

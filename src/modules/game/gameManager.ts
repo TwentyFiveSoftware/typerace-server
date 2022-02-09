@@ -3,7 +3,7 @@ import type { IGame } from './types/Game';
 import type { IGameState } from './types/GameState';
 import type { ILobby } from '../lobby/types/Lobby';
 import { SocketResponseType } from '../../types/SocketResponseType';
-import { getRandomText } from '../text/textManager';
+import { chooseRandomText } from '../text/textManager';
 import { sendLobbyUpdate } from '../lobby/lobbyManager';
 
 const GAME_START_COUNTDOWN_SECONDS = 6;
@@ -21,11 +21,15 @@ const startGame = (props: DefaultEventProps, lobby: ILobby): void => {
         player.isReady = false;
     });
 
+    console.log(lobby.typedTexts);
+    const text = chooseRandomText(lobby);
+    console.log(lobby.typedTexts);
+
     const game: IGame = {
         gameStartTime: Date.now() + GAME_START_COUNTDOWN_SECONDS * 1000,
         started: true,
         isFinished: false,
-        text: getRandomText(),
+        text,
         lobby,
     };
 

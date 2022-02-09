@@ -28,6 +28,7 @@ const createLobby = (): ILobby => {
     const lobby: ILobby = {
         lobbyId: generateLobbyId(),
         players: [],
+        typedTexts: [],
     };
 
     lobbies.push(lobby);
