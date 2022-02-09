@@ -21,9 +21,7 @@ const startGame = (props: DefaultEventProps, lobby: ILobby): void => {
         player.isReady = false;
     });
 
-    console.log(lobby.typedTexts);
     const text = chooseRandomText(lobby);
-    console.log(lobby.typedTexts);
 
     const game: IGame = {
         gameStartTime: Date.now() + GAME_START_COUNTDOWN_SECONDS * 1000,

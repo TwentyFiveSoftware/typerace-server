@@ -16,7 +16,7 @@ const toggleReadyEvent = (props: DefaultEventProps): void => {
 
     sendLobbyUpdate(props, lobbyId);
 
-    if (lobby.players.length > 1 && !lobby.players.some(player => !player.isReady)) {
+    if (lobby.players.length >= 1 && !lobby.players.some(player => !player.isReady)) {
         startGame(props, lobby);
     }
 };
