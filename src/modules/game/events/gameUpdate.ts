@@ -6,7 +6,7 @@ const gameUpdateEvent = (props: DefaultEventProps, currentTextPos: number): void
     const { socket } = props;
 
     const game = getGameOfPlayer(socket.id);
-    if (!game || !game.started || game.isFinished) return;
+    if (!game || !game.started || game.isFinished || Date.now() < game.gameStartTime) return;
 
     const player = getPlayerOfSocket(socket.id);
     if (!player || player.isFinished) return;

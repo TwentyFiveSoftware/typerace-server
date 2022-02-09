@@ -6,6 +6,8 @@ import { SocketResponseType } from '../../types/SocketResponseType';
 import { getRandomText } from '../text/textManager';
 import { sendLobbyUpdate } from '../lobby/lobbyManager';
 
+const GAME_START_COUNTDOWN_SECONDS = 6;
+
 let games: IGame[] = [];
 
 const startGame = (props: DefaultEventProps, lobby: ILobby): void => {
@@ -20,7 +22,7 @@ const startGame = (props: DefaultEventProps, lobby: ILobby): void => {
     });
 
     const game: IGame = {
-        gameStartTime: Date.now(),
+        gameStartTime: Date.now() + GAME_START_COUNTDOWN_SECONDS * 1000,
         started: true,
         isFinished: false,
         text: getRandomText(),
