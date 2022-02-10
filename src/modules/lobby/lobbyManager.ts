@@ -19,12 +19,13 @@ const generateLobbyId = (): string => {
     return id;
 };
 
-const getLobby = (lobbyId: string | null): ILobby | null => lobbies.find(lobby => lobby.lobbyId === lobbyId) ?? null;
+export const getLobby = (lobbyId: string | null): ILobby | null =>
+    lobbies.find(lobby => lobby.lobbyId === lobbyId) ?? null;
 
-const getLobbyIdOfPlayer = (socketId: string): string | null =>
+export const getLobbyIdOfPlayer = (socketId: string): string | null =>
     lobbies.find(lobby => lobby.players.some(player => player.socketId === socketId))?.lobbyId ?? null;
 
-const createLobby = (): ILobby => {
+export const createLobby = (): ILobby => {
     const lobby: ILobby = {
         lobbyId: generateLobbyId(),
         players: [],
@@ -36,7 +37,7 @@ const createLobby = (): ILobby => {
     return lobby;
 };
 
-const joinLobby = (lobbyId: string, socketId: string, username: string): void => {
+export const joinLobby = (lobbyId: string, socketId: string, username: string): void => {
     const player: IPlayer = {
         socketId,
         username,
@@ -51,7 +52,7 @@ const joinLobby = (lobbyId: string, socketId: string, username: string): void =>
     getLobby(lobbyId)?.players.push(player);
 };
 
-const leaveLobby = (socketId: string): void => {
+export const leaveLobby = (socketId: string): void => {
     const lobby = getLobby(getLobbyIdOfPlayer(socketId));
     if (!lobby) return;
 
@@ -60,12 +61,10 @@ const leaveLobby = (socketId: string): void => {
     lobbies = lobbies.filter(lobby => lobby.players.length > 0);
 };
 
-const sendLobbyUpdate = ({ io }: DefaultEventProps, lobbyId: string | null): void => {
+export const sendLobbyUpdate = ({ io }: DefaultEventProps, lobbyId: string | null): void => {
     if (!lobbyId) return;
     io.to(lobbyId).emit(SocketResponseType.LOBBY_UPDATE, getLobby(lobbyId));
 };
 
-const getPlayerOfSocket = (socketId: string): IPlayer | null =>
+export const getPlayerOfSocket = (socketId: string): IPlayer | null =>
     getLobby(getLobbyIdOfPlayer(socketId))?.players.find(player => player.socketId === socketId) ?? null;
-
-export { getLobby, createLobby, joinLobby, leaveLobby, getLobbyIdOfPlayer, sendLobbyUpdate, getPlayerOfSocket };

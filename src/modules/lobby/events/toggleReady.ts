@@ -2,7 +2,7 @@ import type { DefaultEventProps } from '../../../types/DefaultEventProps';
 import { getLobby, getLobbyIdOfPlayer, getPlayerOfSocket, sendLobbyUpdate } from '../lobbyManager';
 import { startGame } from '../../game/gameManager';
 
-const toggleReadyEvent = (props: DefaultEventProps): void => {
+export default (props: DefaultEventProps): void => {
     const { socket } = props;
 
     const player = getPlayerOfSocket(socket.id);
@@ -20,5 +20,3 @@ const toggleReadyEvent = (props: DefaultEventProps): void => {
         startGame(props, lobby);
     }
 };
-
-export default toggleReadyEvent;

@@ -10,7 +10,7 @@ const GAME_START_COUNTDOWN_SECONDS = 6;
 
 let games: IGame[] = [];
 
-const startGame = (props: DefaultEventProps, lobby: ILobby): void => {
+export const startGame = (props: DefaultEventProps, lobby: ILobby): void => {
     if (getGame(lobby.lobbyId) && !getGame(lobby.lobbyId)?.isFinished) return;
 
     lobby.players.forEach(player => {
@@ -39,12 +39,13 @@ const startGame = (props: DefaultEventProps, lobby: ILobby): void => {
     sendGameUpdate(props, game);
 };
 
-const getGameOfPlayer = (socketId: string): IGame | null =>
+export const getGameOfPlayer = (socketId: string): IGame | null =>
     games.find(game => game.lobby.players.some(player => player.socketId === socketId)) ?? null;
 
-const getGame = (lobbyId: string | null): IGame | null => games.find(game => game.lobby.lobbyId === lobbyId) ?? null;
+export const getGame = (lobbyId: string | null): IGame | null =>
+    games.find(game => game.lobby.lobbyId === lobbyId) ?? null;
 
-const sendGameUpdate = ({ io }: DefaultEventProps, game: IGame | null): void => {
+export const sendGameUpdate = ({ io }: DefaultEventProps, game: IGame | null): void => {
     if (!game) return;
 
     const gameState: IGameState = {
@@ -57,7 +58,7 @@ const sendGameUpdate = ({ io }: DefaultEventProps, game: IGame | null): void => 
     io.to(game.lobby.lobbyId).emit(SocketResponseType.GAME_UPDATE, gameState);
 };
 
-const startGameUpdateLoop = (props: DefaultEventProps, game: IGame): void => {
+export const startGameUpdateLoop = (props: DefaultEventProps, game: IGame): void => {
     const interval = setInterval(() => {
         const minutesPassed = (Date.now() - game.gameStartTime) / 60000;
 
@@ -76,7 +77,7 @@ const startGameUpdateLoop = (props: DefaultEventProps, game: IGame): void => {
     }, 1000);
 };
 
-const leaveGame = (socketId: string): void => {
+export const leaveGame = (socketId: string): void => {
     const game = getGameOfPlayer(socketId);
     if (!game) return;
 
@@ -84,5 +85,3 @@ const leaveGame = (socketId: string): void => {
 
     games = games.filter(game => game.lobby.players.length > 0);
 };
-
-export { getGame, startGame, getGameOfPlayer, sendGameUpdate, leaveGame };

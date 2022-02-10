@@ -1,7 +1,7 @@
 import type { DefaultEventProps } from '../../../types/DefaultEventProps';
-import { getGameOfPlayer, leaveGame, sendGameUpdate } from '../gameManager';
+import { leaveGame, getGameOfPlayer, sendGameUpdate } from '../gameManager';
 
-const leaveGameEvent = (props: DefaultEventProps): void => {
+export default (props: DefaultEventProps): void => {
     const { socket } = props;
 
     const game = getGameOfPlayer(socket.id);
@@ -10,5 +10,3 @@ const leaveGameEvent = (props: DefaultEventProps): void => {
     leaveGame(socket.id);
     sendGameUpdate(props, game);
 };
-
-export default leaveGameEvent;

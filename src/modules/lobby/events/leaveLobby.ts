@@ -1,7 +1,7 @@
 import type { DefaultEventProps } from '../../../types/DefaultEventProps';
 import { getLobbyIdOfPlayer, leaveLobby, sendLobbyUpdate } from '../lobbyManager';
 
-const leaveLobbyEvent = (props: DefaultEventProps): void => {
+export default (props: DefaultEventProps): void => {
     const { socket } = props;
 
     const lobbyId = getLobbyIdOfPlayer(socket.id);
@@ -10,5 +10,3 @@ const leaveLobbyEvent = (props: DefaultEventProps): void => {
     leaveLobby(socket.id);
     sendLobbyUpdate(props, lobbyId);
 };
-
-export default leaveLobbyEvent;

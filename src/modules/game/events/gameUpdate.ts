@@ -2,7 +2,7 @@ import { DefaultEventProps } from '../../../types/DefaultEventProps';
 import { getGameOfPlayer, sendGameUpdate } from '../gameManager';
 import { getPlayerOfSocket } from '../../lobby/lobbyManager';
 
-const gameUpdateEvent = (props: DefaultEventProps, currentTextPos: number): void => {
+export default (props: DefaultEventProps, currentTextPos: number): void => {
     const { socket } = props;
 
     const game = getGameOfPlayer(socket.id);
@@ -20,5 +20,3 @@ const gameUpdateEvent = (props: DefaultEventProps, currentTextPos: number): void
 
     sendGameUpdate(props, game);
 };
-
-export default gameUpdateEvent;
