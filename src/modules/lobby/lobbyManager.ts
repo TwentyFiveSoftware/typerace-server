@@ -57,6 +57,7 @@ export const leaveLobby = (socketId: string): void => {
     if (!lobby) return;
 
     lobby.players = lobby.players.filter(player => player.socketId !== socketId);
+    lobby.players.forEach(player => (player.isReady = false));
 
     lobbies = lobbies.filter(lobby => lobby.players.length > 0);
 };
