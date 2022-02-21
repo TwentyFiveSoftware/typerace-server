@@ -210,7 +210,7 @@ export const TEXTS: string[] = [
     'Color or colour is the visual perceptual property corresponding in humans to the categories called blue, green, red, etc. Color derives from the spectrum of light interacting in the eye with the spectral sensitivities of the light receptors.',
 
     // https://en.wikipedia.org/wiki/3D_printing
-    '3D printing, or additive manufacturing, is the construction of a three-dimensional object from a CAD model or a digital 3D model. The term "3D printing" can refer to a variety of processes in which material is deposited, joined or solidified under computer control to create a three-dimensional object',
+    '3D printing, or additive manufacturing, is the construction of a three-dimensional object from a CAD model or a digital 3D model. The term "3D printing" can refer to a variety of processes in which material is deposited, joined or solidified under computer control to create a three-dimensional object.',
 
     // https://en.wikipedia.org/wiki/Hyperloop
     'A Hyperloop is a proposed high-speed transportation system for both passenger and freight transport.The term was coined by Elon Musk to describe the modern open-source project originally conceived in 1799.',
@@ -258,7 +258,7 @@ export const TEXTS: string[] = [
     'A film, also called a movie, motion picture or moving picture, is a work of visual art used to simulate experiences that communicate ideas, stories, perceptions, feelings, beauty, or atmosphere through the use of moving images.',
 
     // https://en.wikipedia.org/wiki/Rendering_(computer_graphics)
-    'Rendering or image synthesis is the process of generating a photorealistic or non-photorealistic image from a 2D or 3D model by means of a computer program. The resulting image is referred to as the render.',
+    'Rendering or image synthesis is the process of generating a photorealistic or non-photorealistic image from a 2D or model by means of a computer program. The resulting image is referred to as the render.',
 
     // https://en.wikipedia.org/wiki/3D_modeling
     'In 3D computer graphics, 3D modeling is the process of developing a mathematical coordinate-based representation of any surface of an object in three dimensions via specialized software by manipulating edges, vertices, and polygons in a simulated 3D space.',
@@ -271,4 +271,7 @@ export const TEXTS: string[] = [
 
     // https://en.wikipedia.org/wiki/Season
     "A season is a division of the year based on changes in weather, ecology, and the number of daylight hours in a given region. On Earth, seasons are the result of Earth's orbit around the Sun and Earth's axial tilt relative to the ecliptic plane.",
+
+    // https://en.wikipedia.org/wiki/SpinLaunch
+    'SpinLaunch is a spaceflight technology development company working on mass accelerator technology to move payloads to space.',
 ];
