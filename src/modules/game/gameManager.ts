@@ -6,7 +6,7 @@ import { SocketResponseType } from '../../types/SocketResponseType';
 import { chooseRandomText } from '../text/textManager';
 import { sendLobbyUpdate } from '../lobby/lobbyManager';
 
-const GAME_START_COUNTDOWN_SECONDS = 6;
+const GAME_START_COUNTDOWN_SECONDS = 5.5;
 
 let games: IGame[] = [];
 
